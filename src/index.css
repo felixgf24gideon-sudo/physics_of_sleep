@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: #050510;
+  }
+}
+
+@layer utilities {
+  .bento-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid #27272a; /* border-zinc-800 */
+    border-radius: 1.5rem; /* 24px */
+  }
+
+  .glass-control {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px currentColor;
+  }
+}
+
+/* Custom Slider Styles */
+.spectrum-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px;
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+  background: linear-gradient(
+    to right,
+    #8b00ff 0%,
+    #4b0082 5%,
+    #0000ff 10%,
+    #00bfff 20%,
+    #00ff00 30%,
+    #ffff00 45%,
+    #ffa500 60%,
+    #ff4500 75%,
+    #ff0000 100%
+  );
+  box-shadow: 0 0 16px 2px rgba(100, 100, 255, 0.3);
+}
+
+.spectrum-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15), 0 0 20px 6px var(--thumb-glow, rgba(100, 149, 237, 0.8));
+  background: var(--thumb-color, #6495ed);
+}
+
+.spectrum-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.spectrum-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 20px 6px var(--thumb-glow, rgba(100, 149, 237, 0.8));
+  background: var(--thumb-color, #6495ed);
+  transition: transform 0.15s ease;
+}
+
+.spectrum-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Glow pulse ring around slider thumb */
+.slider-ring {
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
