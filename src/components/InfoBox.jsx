@@ -55,7 +55,7 @@ export default function InfoBox({ wavelength }) {
               </div>
               <div className="space-y-1.5">
                 <p className="text-sm font-bold text-zinc-200">Saran</p>
-                <p className="text-sm text-zinc-400 italic leading-relaxed">
+                <p className="text-base font-bold text-zinc-200 leading-relaxed">
                   {info.tip}
                 </p>
               </div>
@@ -66,10 +66,15 @@ export default function InfoBox({ wavelength }) {
         {/* 3. The Metadata Footer: Data Source */}
         <div className="mt-auto pt-8 w-full">
           <hr className="border-zinc-800/50 mb-4" />
-          <p className="text-base font-medium text-zinc-500">
-            <span className="font-bold text-zinc-400">Data Source — </span>
-            {lightSource.source}
-          </p>
+          <div className="space-y-3">
+            <p className="text-base font-bold text-zinc-400">
+              <span className="text-zinc-500 uppercase tracking-wider text-xs block mb-1">Sumber Cahaya</span>
+              {lightSource.source}
+            </p>
+            <p className="text-sm font-bold text-zinc-500 leading-relaxed border-l-2 border-zinc-700 pl-4 py-1">
+              Simulasi ini mengasumsikan intensitas cahaya 100 lux (setara ruang tamu terang) dan durasi pajanan ~1-2 jam. Hasil bersifat estimasi edukasi, bukan presisi klinis.
+            </p>
+          </div>
         </div>
       </motion.div>
     </AnimatePresence>
