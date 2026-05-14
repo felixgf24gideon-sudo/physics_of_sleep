@@ -4,7 +4,7 @@ import { Moon, Zap, Scale } from 'lucide-react';
 
 /**
  * Circular gauge showing melatonin production level.
- * melatoninLevel: 0.0 (suppressed) to 1.0 (full production)
+ * melatoninLevel: 0 (suppressed) to 100 (full production)
  */
 export default function MelatoninGauge({ melatoninLevel, wavelength }) {
   const hex = wavelengthToHex(wavelength);
@@ -17,18 +17,18 @@ export default function MelatoninGauge({ melatoninLevel, wavelength }) {
   const arcLength = circumference * 0.75; // 270 degree arc
 
   // Melatonin level controls how much of the arc is filled
-  const fillLength = arcLength * melatoninLevel;
+  const fillLength = arcLength * (melatoninLevel / 100);
   const gapLength = arcLength - fillLength;
 
   // Color gradient: red (danger) → amber → green (good for sleep)
-  const gaugeColor = melatoninLevel < 0.3
+  const gaugeColor = melatoninLevel < 30
     ? '#ef4444'
-    : melatoninLevel < 0.55
+    : melatoninLevel < 55
       ? '#f59e0b'
       : '#4ade80';
 
-  const percent = Math.round(melatoninLevel * 100);
-  const status = melatoninLevel < 0.3 ? 'Supresi Kritis' : melatoninLevel < 0.55 ? 'Terdisrupsi' : 'Optimal';
+  const percent = Math.round(melatoninLevel);
+  const status = melatoninLevel < 30 ? 'Supresi Kritis' : melatoninLevel < 55 ? 'Terdisrupsi' : 'Optimal';
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -142,15 +142,15 @@ export default function MelatoninGauge({ melatoninLevel, wavelength }) {
         transition={{ duration: 0.5 }}
         className="mt-4 flex items-center gap-2 text-xs font-semibold"
       >
-        {melatoninLevel < 0.3 ? (
+        {melatoninLevel < 30 ? (
           <>
             <Zap size={14} strokeWidth={2} />
             <span>Melatonin ditekan oleh cahaya pendek</span>
           </>
-        ) : melatoninLevel < 0.55 ? (
+        ) : melatoninLevel < 55 ? (
           <>
             <Scale size={14} strokeWidth={2} />
-            <span>Produksi melatonin  terganggu</span>
+            <span>Produksi melatonin terganggu</span>
           </>
         ) : (
           <>
@@ -159,6 +159,11 @@ export default function MelatoninGauge({ melatoninLevel, wavelength }) {
           </>
         )}
       </motion.div>
+
+      {/* Scientific Disclaimer */}
+      <div className="mt-4 text-[10px] text-white/30 text-center max-w-[200px] leading-relaxed italic">
+        Asumsi intensitas 100 lux (ruangan tipikal). Hasil hanya estimasi edukasi.
+      </div>
     </div>
   );
 }
