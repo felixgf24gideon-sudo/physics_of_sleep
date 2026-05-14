@@ -13,7 +13,7 @@ export default function CircadianWave({ melatoninLevel, wavelength }) {
   const controls = useAnimation();
 
   const curveData = useMemo(
-    () => generateCircadianCurve(melatoninLevel, 120),
+    () => generateCircadianCurve(melatoninLevel / 100, 120),
     [melatoninLevel]
   );
 
@@ -28,13 +28,13 @@ export default function CircadianWave({ melatoninLevel, wavelength }) {
   }, [melatoninLevel]);
 
   // Wave color: blue when suppressed, teal/green when healthy
-  const waveColor = melatoninLevel < 0.3
+  const waveColor = melatoninLevel < 30
     ? '#818cf8'
-    : melatoninLevel < 0.6
+    : melatoninLevel < 60
     ? '#34d399'
     : '#a78bfa';
 
-  const suppressed = melatoninLevel < 0.35;
+  const suppressed = melatoninLevel < 35;
 
   return (
     <div className="flex flex-col gap-3 w-full">
